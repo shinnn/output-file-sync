@@ -1,6 +1,6 @@
 {
   "name": "output-file-sync",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Synchronously write a file and create its ancestor directories if needed",
   "repository": "shinnn/output-file-sync",
   "author": {
