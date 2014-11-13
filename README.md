@@ -51,6 +51,7 @@ var outputFileSync = require('output-file-sync');
 *path*: `String`  
 *data*: `String` or [`Buffer`](http://nodejs.org/api/buffer.html#buffer_class_buffer)  
 *options*: `Object` or `String` (options for [fs.writeFile] and [mkdirp])
+Return: `String` if it creates more than one directories, otherwise `null`
 
 It writes the data to a file synchronously. If ancestor directories of the file don't exist, it creates the directories before writing the file.
 
