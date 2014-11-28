@@ -79,7 +79,7 @@ dir; //=> Same value as `path.resolve('foo')`
 
 All options for [fs.writeFile] and [mkdirp] are available.
 
-Additionally, you can use `fileMode` option and `dirMode` option to set different permission between the file and directories.
+Additionally, you can use [`fileMode`](#optionsfilemode) option and [`dirMode`](#optionsdirmode) option to set different permission between the file and directories.
 
 ##### options.fileMode
 
