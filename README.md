@@ -90,8 +90,8 @@ Set modes of a file, overriding `mode` option.
 Set modes of a directories, overriding `mode` option.
 
 ```javascript
-outputFileSync('dir/file', 'content', {dirMode: '0777', fileMode: '0644'});
-fs.statSync('dir').mode.toString(8); //=> '40755'
+outputFileSync('dir/file', 'content', {dirMode: '0745', fileMode: '0644'});
+fs.statSync('dir').mode.toString(8); //=> '40745'
 fs.statSync('dir/file').mode.toString(8); //=> '100644'
 ```
 
