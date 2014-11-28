@@ -20,7 +20,7 @@ fs.readFileSync('foo/bar/baz.txt').toString(); //=> 'Hi!'
 
 This module is very similar to [fs-extra](https://github.com/jprichardson/node-fs-extra)'s [`fs.outputFileSync`](https://github.com/jprichardson/node-fs-extra#outputfilefile-data-callback) but they are different in the following points:
 
-1. *output-file-sync* returns the path of first-created directory. [See the API document for more details.](#outputfilesyncpath-data--options)
+1. *output-file-sync* returns the path of the directory created first. [See the API document for more details.](#outputfilesyncpath-data--options)
 2. *output-file-sync* accepts [mkdirp] options.
    ```javascript
    var fs = require('fs');
@@ -50,7 +50,7 @@ var outputFileSync = require('output-file-sync');
 
 *path*: `String`  
 *data*: `String` or [`Buffer`](http://nodejs.org/api/buffer.html#buffer_class_buffer)  
-*options*: `Object` or `String` (options for [fs.writeFile] and [mkdirp])
+*options*: `Object` or `String` (options for [fs.writeFile] and [mkdirp])  
 Return: `String` if it creates more than one directories, otherwise `null`
 
 It writes the data to a file synchronously. If ancestor directories of the file don't exist, it creates the directories before writing the file.
@@ -75,11 +75,24 @@ var dir = outputFileSync('foo/bar/baz.txt', 'Hello');
 dir; //=> Same value as `path.resolve('foo')`
 ```
 
+#### options
+
 All options for [fs.writeFile] and [mkdirp] are available.
 
+Additionally, you can use `fileMode` option and `dirMode` option to set different permission between the file and directories.
+
+##### options.fileMode
+
+Set modes of a file, overriding `mode` option.
+
+##### options.dirMode
+
+Set modes of a directories, overriding `mode` option.
+
 ```javascript
-outputFileSync('foo', '012345', {encoding: 'foo'});
-fs.readFileSync('foo').toString(); //=> 'MDEyMzQ1'
+outputFileSync('dir/file', 'content', {dirMode: '0777', fileMode: '0644'});
+fs.statSync('dir').mode.toString(8); //=> '40755'
+fs.statSync('dir/file').mode.toString(8); //=> '100644'
 ```
 
 ## Related project

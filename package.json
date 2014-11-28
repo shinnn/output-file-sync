@@ -8,9 +8,8 @@
     "url": "https://github.com/shinnn"
   },
   "scripts": {
-    "clean": "rimraf tmp_file tmp",
     "pretest": "eslint *.js & jscs *.js",
-    "test": "node test.js | tap-spec; ${npm_package_scripts_clean}",
+    "test": "node test.js | tap-spec;",
     "coverage": "istanbul cover test.js; ${npm_package_scripts_clean}",
     "coveralls": "istanbul cover test.js && istanbul-coveralls"
   },
@@ -35,14 +34,15 @@
     "mkdirp"
   ],
   "dependencies": {
-    "mkdirp": "^0.5.0"
+    "mkdirp": "^0.5.0",
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^0.10.0",
     "istanbul": "^0.3.2",
     "istanbul-coveralls": "^1.0.1",
     "jscs": "^1.8.0",
-    "rimraf": "^2.2.8",
+    "read-remove-file": "^1.0.0",
     "tap-spec": "^2.1.0",
     "tape": "^3.0.3"
   },
