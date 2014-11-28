@@ -28,8 +28,15 @@ test('outputFileSync()', function(t) {
 
   fs.stat('tmp/foo', function(err, stat) {
     t.strictEqual(err, null, 'should accept mkdirp\'s option.');
+
+    var expected = '100744';
+    /* istanbul ignore if */
+    if (process.platform === 'win32') {
+      expected = '100666';
+    }
+
     t.equal(
-      stat.mode.toString(8), '100744',
+      stat.mode.toString(8), expected,
       'should reflect `mode` option to the file mode.'
     );
 
@@ -41,8 +48,15 @@ test('outputFileSync()', function(t) {
 
   fs.stat('tmp', function(err, stat) {
     t.strictEqual(err, null, 'should create a directory.');
+
+    var expected = '40744';
+    /* istanbul ignore if */
+    if (process.platform === 'win32') {
+      expected = '40666';
+    }
+
     t.equal(
-      stat.mode.toString(8), '40744',
+      stat.mode.toString(8), expected,
       'should reflect `mode` option to the directory mode.'
     );
   });
@@ -55,16 +69,30 @@ test('outputFileSync()', function(t) {
 
   fs.stat('t/m', function(err, stat) {
     t.strictEqual(err, null, 'should create multiple directories.');
+
+    var expected = '40745';
+    /* istanbul ignore if */
+    if (process.platform === 'win32') {
+      expected = '40666';
+    }
+
     t.equal(
-      stat.mode.toString(8), '40745',
+      stat.mode.toString(8), expected,
       'should reflect `dirMode` option to the directory mode.'
     );
   });
 
   fs.stat('t/m/p', function(err, stat) {
     t.strictEqual(err, null, 'should create a file into the new directories.');
+
+    var expected = '100644';
+    /* istanbul ignore if */
+    if (process.platform === 'win32') {
+      expected = '100666';
+    }
+
     t.equal(
-      stat.mode.toString(8), '100644',
+      stat.mode.toString(8), expected,
       'should reflect `fileMode` option to the file mode.'
     );
 
