@@ -1,5 +1,5 @@
 init:
-  - git config --global core.autocrlf input
+  - git config --global core.autocrlf true
 
 version: '{build}'
 
@@ -21,3 +21,6 @@ test_script:
   - rimraf tmp
   - rimraf tmp_file
   - cmd: node test.js
+
+cache:
+  - node_modules
