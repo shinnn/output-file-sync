@@ -10,14 +10,20 @@ var test = require('tape');
 test('outputFileSync()', function(t) {
   t.plan(20);
 
+  t.equal(outputFileSync.name, 'outputFileSync', 'should have a function name.');
+
   t.equal(
-    outputFileSync('tmp_file', 'foo', 'utf8'), null,
+    outputFileSync('tmp_file', 'foo', 'utf8'),
+    null,
     'should return null when it doesn\'t create any directories.'
   );
 
   readRemoveFile('tmp_file', 'utf8', function(err, content) {
-    t.strictEqual(err, null, 'should create a file into the existing directory.');
-    t.equal(content, 'foo', 'should write contents to the file correctly.');
+    t.deepEqual(
+      [err, content],
+      [null, 'foo'],
+      'should create a file into the existing directory.'
+    );
   });
 
   t.equal(
@@ -41,8 +47,11 @@ test('outputFileSync()', function(t) {
     );
 
     readRemoveFile('tmp/foo', 'utf8', function(err, content) {
-      t.strictEqual(err, null, 'should create a file into the new directory.');
-      t.equal(content, 'a', 'should accept a buffer as its second argument.');
+      t.deepEqual(
+        [err, content],
+        [null, 'a'],
+        'should create a file into the new directory.'
+      );
     });
   });
 
@@ -97,28 +106,47 @@ test('outputFileSync()', function(t) {
     );
 
     readRemoveFile('t/m/p', 'utf8', function(err, content) {
-      t.strictEqual(err, null, 'should accept fs.writeFile\'s option.');
-      t.equal(content, 'Y', 'should reflect `encoding` option to the file content.');
+      t.deepEqual(
+        [err, content],
+        [null, 'Y'],
+        'should accept fs.writeFile\'s option.'
+      );
     });
   });
 
   t.throws(
-    outputFileSync.bind(null, 'node_modules/mkdirp', ''), /EISDIR/,
-    'should throw an error when fs.writeFile() fails.'
+    outputFileSync.bind(null, 'node_modules/mkdirp', ''),
+    /EISDIR/,
+    'should throw an error when fs.writeFile fails.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'index.js/foo', ''), /EEXIST/,
-    'should throw an error when mkdirp() fails.'
+    outputFileSync.bind(null, 'index.js/foo', ''),
+    /EEXIST/,
+    'should throw an error when mkdirp fails.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'foo', '', 'bar'), /Unknown encoding/,
+    outputFileSync.bind(null, 'foo', '', 'utf9'),
+    /Unknown encoding.*utf9/,
     'should throw an error when the option is not valid for fs.writeFile.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'f/o/o', '', {fs: []}), /TypeError/,
-    'should throw an error when the option is not valid for mkdirp.'
+    outputFileSync.bind(null, 'f/o/o', '', {fs: []}),
+    /TypeError/,
+    'should throw a type error when the option is not valid for mkdirp.'
+  );
+
+  t.throws(
+    outputFileSync.bind(null, 123, ''),
+    /TypeError.*path/,
+    'should throw a type error when the first argument is not a string.'
+  );
+
+  t.throws(
+    outputFileSync.bind(null),
+    /TypeError.*path/,
+    'should throw a type error when it takes no arguments.'
   );
 });
