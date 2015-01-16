@@ -1,10 +1,11 @@
 # output-file-sync
 
+[![NPM version](https://img.shields.io/npm/v/output-file-sync.svg?style=flat)](https://www.npmjs.com/package/output-file-sync)
 [![Build Status](https://travis-ci.org/shinnn/output-file-sync.svg?branch=master)](https://travis-ci.org/shinnn/output-file-sync)
 [![Build status](https://ci.appveyor.com/api/projects/status/3qjn5ktuqb6w2cae?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/output-file-sync)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/output-file-sync.svg)](https://coveralls.io/r/shinnn/output-file-sync)
-[![Dependency Status](https://david-dm.org/shinnn/output-file-sync.svg)](https://david-dm.org/shinnn/output-file-sync)
-[![devDependency Status](https://david-dm.org/shinnn/output-file-sync/dev-status.svg)](https://david-dm.org/shinnn/output-file-sync#info=devDependencies)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/output-file-sync.svg?style=flat)](https://coveralls.io/r/shinnn/output-file-sync)
+[![Dependency Status](https://img.shields.io/david/shinnn/output-file-sync.svg?style=flat&label=deps)](https://david-dm.org/shinnn/output-file-sync)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/output-file-sync.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/output-file-sync#info=devDependencies)
 
 Synchronously write a file and create its ancestor directories if needed
 
@@ -32,9 +33,7 @@ This module is very similar to [fs-extra](https://github.com/jprichardson/node-f
 
 ## Installation
 
-[![NPM version](https://badge.fury.io/js/output-file-sync.svg)](https://www.npmjs.org/package/output-file-sync)
-
-[Use npm.](https://www.npmjs.org/doc/cli/npm-install.html)
+[Use npm.](https://docs.npmjs.com/cli/install)
 
 ```sh
 npm install output-file-sync
@@ -87,7 +86,7 @@ Set modes of a file, overriding `mode` option.
 
 ##### options.dirMode
 
-Set modes of a directories, overriding `mode` option.
+Set modes of directories, overriding `mode` option.
 
 ```javascript
 outputFileSync('dir/file', 'content', {dirMode: '0745', fileMode: '0644'});
@@ -101,7 +100,7 @@ fs.statSync('dir/file').mode.toString(8); //=> '100644'
 
 ## License
 
-Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
