@@ -8,9 +8,9 @@
     "url": "https://github.com/shinnn"
   },
   "scripts": {
-    "pretest": "eslint *.js & jscs *.js",
+    "pretest": "jscs *.js && eslint *.js",
     "test": "node test.js | tap-spec;",
-    "coverage": "istanbul cover test.js; ${npm_package_scripts_clean}",
+    "coverage": "istanbul cover test.js;",
     "coveralls": "istanbul cover test.js && istanbul-coveralls"
   },
   "licenses": [
@@ -48,6 +48,8 @@
   },
   "jscsConfig": {
     "preset": "google",
-    "maximumLineLength": 98
+    "maximumLineLength": 98,
+    "requireBlocksOnNewline": true,
+    "validateLineBreaks": "LF"
   }
 }
