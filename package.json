@@ -38,13 +38,13 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^0.10.0",
-    "istanbul": "^0.3.2",
+    "eslint": "^0.11.0",
+    "istanbul": "^0.3.5",
     "istanbul-coveralls": "^1.0.1",
-    "jscs": "^1.8.0",
-    "read-remove-file": "^1.0.0",
-    "tap-spec": "^2.1.0",
-    "tape": "^3.0.3"
+    "jscs": "^1.10.0",
+    "read-remove-file": "^1.0.1",
+    "tap-spec": "^2.1.2",
+    "tape": "^3.2.0"
   },
   "jscsConfig": {
     "preset": "google",
