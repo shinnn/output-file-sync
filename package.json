@@ -9,8 +9,8 @@
   },
   "scripts": {
     "pretest": "jscs *.js && eslint *.js",
-    "test": "node test.js | tap-spec;",
-    "coverage": "istanbul cover test.js;",
+    "test": "node test.js | tap-spec",
+    "coverage": "istanbul cover test.js",
     "coveralls": "istanbul cover test.js && istanbul-coveralls"
   },
   "licenses": [
@@ -20,8 +20,7 @@
     }
   ],
   "files": [
-    "index.js",
-    "LICENSE"
+    "index.js"
   ],
   "keywords": [
     "fs",
@@ -38,13 +37,13 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^0.11.0",
-    "istanbul": "^0.3.5",
-    "istanbul-coveralls": "^1.0.1",
+    "eslint": "^0.18.0",
+    "istanbul": "^0.3.13",
+    "istanbul-coveralls": "^1.0.2",
     "jscs": "^1.10.0",
     "read-remove-file": "^1.0.1",
-    "tap-spec": "^2.1.2",
-    "tape": "^3.2.0"
+    "tap-spec": "^3.0.0",
+    "tape": "^4.0.0"
   },
   "jscsConfig": {
     "preset": "google",
