@@ -32,8 +32,8 @@ test('outputFileSync()', function(t) {
     'should return the path of the first created directory.'
   );
 
-  fs.stat('tmp/foo', function(err, stat) {
-    t.strictEqual(err, null, 'should accept mkdirp\'s option.');
+  fs.stat('tmp/foo', function(statErr, stat) {
+    t.strictEqual(statErr, null, 'should accept mkdirp\'s option.');
 
     var expected = '100744';
     /* istanbul ignore if */
@@ -46,9 +46,9 @@ test('outputFileSync()', function(t) {
       'should reflect `mode` option to the file mode.'
     );
 
-    readRemoveFile('tmp/foo', 'utf8', function(err, content) {
+    readRemoveFile('tmp/foo', 'utf8', function(readErr, content) {
       t.deepEqual(
-        [err, content],
+        [readErr, content],
         [null, 'a'],
         'should create a file into the new directory.'
       );
@@ -91,8 +91,8 @@ test('outputFileSync()', function(t) {
     );
   });
 
-  fs.stat('t/m/p', function(err, stat) {
-    t.strictEqual(err, null, 'should create a file into the new directories.');
+  fs.stat('t/m/p', function(statErr, stat) {
+    t.strictEqual(statErr, null, 'should create a file into the new directories.');
 
     var expected = '100644';
     /* istanbul ignore if */
@@ -105,9 +105,9 @@ test('outputFileSync()', function(t) {
       'should reflect `fileMode` option to the file mode.'
     );
 
-    readRemoveFile('t/m/p', 'utf8', function(err, content) {
+    readRemoveFile('t/m/p', 'utf8', function(readErr, content) {
       t.deepEqual(
-        [err, content],
+        [readErr, content],
         [null, 'Y'],
         'should accept fs.writeFile\'s option.'
       );
