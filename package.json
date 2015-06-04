@@ -3,22 +3,14 @@
   "version": "1.1.0",
   "description": "Synchronously write a file and create its ancestor directories if needed",
   "repository": "shinnn/output-file-sync",
-  "author": {
-    "name": "Shinnosuke Watanabe",
-    "url": "https://github.com/shinnn"
-  },
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "jscs *.js && eslint *.js",
+    "pretest": "eslint *.js --config node_modules/@shinnn/eslintrc-node/rc.json",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
     "coveralls": "istanbul cover test.js && istanbul-coveralls"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/shinnn/output-file-sync/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -33,22 +25,16 @@
     "mkdirp"
   ],
   "dependencies": {
-    "mkdirp": "^0.5.0",
+    "mkdirp": "^0.5.1",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^0.18.0",
-    "istanbul": "^0.3.13",
+    "@shinnn/eslintrc-node": "^1.0.2",
+    "eslint": "^0.22.1",
+    "istanbul": "^0.3.14",
     "istanbul-coveralls": "^1.0.2",
-    "jscs": "^1.10.0",
-    "read-remove-file": "^1.0.1",
-    "tap-spec": "^3.0.0",
+    "read-remove-file": "^2.0.0",
+    "tap-spec": "^4.0.0",
     "tape": "^4.0.0"
-  },
-  "jscsConfig": {
-    "preset": "google",
-    "maximumLineLength": 98,
-    "requireBlocksOnNewline": true,
-    "validateLineBreaks": "LF"
   }
 }
