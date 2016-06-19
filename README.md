@@ -17,9 +17,9 @@ outputFileSync('foo/bar/baz.txt', 'Hi!');
 fs.readFileSync('foo/bar/baz.txt').toString(); //=> 'Hi!'
 ```
 
-## Difference from [fs.outputFileSync](https://www.npmjs.com/package/fs-extra#outputfile-file-data-callback)
+## Difference from [fs.outputFileSync](https://www.npmjs.com/package/fs-extra#outputfilefile-data-options-callback)
 
-This module is very similar to [fs-extra](https://github.com/jprichardson/node-fs-extra)'s [`fs.outputFileSync`](https://github.com/jprichardson/node-fs-extra#outputfilefile-data-callback) but they are different in the following points:
+This module is very similar to [fs-extra](https://github.com/jprichardson/node-fs-extra)'s [`fs.outputFileSync`](https://github.com/jprichardson/node-fs-extra#outputfilefile-data-options-callback) but they are different in the following points:
 
 1. *output-file-sync* returns the path of the directory created first. [See the API document for more details.](#outputfilesyncpath-data--options)
 2. *output-file-sync* accepts [mkdirp] options.
@@ -49,7 +49,7 @@ const outputFileSync = require('output-file-sync');
 
 *path*: `String`  
 *data*: `String` or [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer)  
-*options*: `Object` or `String` (options for [fs.writeFile] and [mkdirp])  
+*options*: `Object` or `String` (options for [fs.writeFileSync] and [mkdirp])  
 Return: `String` if it creates more than one directories, otherwise `null`
 
 It writes the data to a file synchronously. If ancestor directories of the file don't exist, it creates the directories before writing the file.
@@ -76,9 +76,9 @@ dir; //=> Same value as `path.resolve('foo')`
 
 #### options
 
-All options for [fs.writeFile] and [mkdirp] are available.
+All options for [fs.writeFileSync] and [mkdirp] are available.
 
-Additionally, you can use [`fileMode`](#optionsfilemode) option and [`dirMode`](#optionsdirmode) option to set different permission between the file and directories.
+Additionally, you can pass [`fileMode`](#optionsfilemode and [`dirMode`](#optionsdirmode) options to set different permission between the file and directories.
 
 ##### options.fileMode
 
@@ -104,5 +104,5 @@ Copyright (c) 2014 - 2016 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
-[fs.writeFile]: https://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback
+[fs.writeFileSync]: https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options
 [mkdirp]: https://github.com/substack/node-mkdirp
