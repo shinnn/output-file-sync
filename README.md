@@ -4,8 +4,8 @@
 [![Build Status](https://travis-ci.org/shinnn/output-file-sync.svg?branch=master)](https://travis-ci.org/shinnn/output-file-sync)
 [![Build status](https://ci.appveyor.com/api/projects/status/3qjn5ktuqb6w2cae?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/output-file-sync)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/output-file-sync.svg)](https://coveralls.io/r/shinnn/output-file-sync)
-[![Dependency Status](https://img.shields.io/david/shinnn/output-file-sync.svg?label=deps)](https://david-dm.org/shinnn/output-file-sync)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/output-file-sync.svg?label=devDeps)](https://david-dm.org/shinnn/output-file-sync#info=devDependencies)
+[![Dependency Status](https://david-dm.org/shinnn/output-file-sync.svg)](https://david-dm.org/shinnn/output-file-sync)
+[![devDependency Status](https://david-dm.org/shinnn/output-file-sync/dev-status.svg)](https://david-dm.org/shinnn/output-file-sync#info=devDependencies)
 
 Synchronously write a file and create its ancestor directories if needed
 
