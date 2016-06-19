@@ -29,12 +29,11 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "@shinnn/eslintrc-node": "^1.0.2",
-    "eslint": "^0.22.1",
-    "istanbul": "^0.3.14",
-    "istanbul-coveralls": "^1.0.2",
-    "read-remove-file": "^2.0.0",
-    "tap-spec": "^4.0.0",
-    "tape": "^4.0.0"
+    "@shinnn/eslint-config-node-legacy": "^2.0.0",
+    "eslint": "^2.13.0",
+    "istanbul": "^0.4.3",
+    "read-remove-file": "^3.0.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
   }
 }
