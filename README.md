@@ -14,7 +14,7 @@ const fs = require('fs');
 const outputFileSync = require('output-file-sync');
 
 outputFileSync('foo/bar/baz.txt', 'Hi!');
-fs.readFileSync('foo/bar/baz.txt').toString(); //=> 'Hi!'
+fs.readFileSync('foo/bar/baz.txt', 'utf8'); //=> 'Hi!'
 ```
 
 ## Difference from [fs.outputFileSync](https://www.npmjs.com/package/fs-extra#outputfilefile-data-options-callback)
@@ -78,7 +78,7 @@ dir; //=> Same value as `path.resolve('foo')`
 
 All options for [fs.writeFileSync] and [mkdirp] are available.
 
-Additionally, you can pass [`fileMode`](#optionsfilemode and [`dirMode`](#optionsdirmode) options to set different permission between the file and directories.
+Additionally, you can pass [`fileMode`](#optionsfilemode) and [`dirMode`](#optionsdirmode) options to set different permission between the file and directories.
 
 ##### options.fileMode
 
