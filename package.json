@@ -1,6 +1,6 @@
 {
   "name": "output-file-sync",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Synchronously write a file and create its ancestor directories if needed",
   "repository": "shinnn/output-file-sync",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
@@ -19,6 +19,7 @@
     "sync",
     "synchronous",
     "output",
+    "create",
     "file",
     "mkdir",
     "mkdirp"
