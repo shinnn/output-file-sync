@@ -25,8 +25,9 @@
     "mkdirp"
   ],
   "dependencies": {
+    "graceful-fs": "^4.1.4",
     "mkdirp": "^0.5.1",
-    "xtend": "^4.0.0"
+    "object-assign": "^4.1.0"
   },
   "devDependencies": {
     "@shinnn/eslintrc-node": "^1.0.2",

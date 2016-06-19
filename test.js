@@ -1,14 +1,14 @@
-'use strict';
+'use strong';
 
-var fs = require('fs');
-var path = require('path');
+const fs = require('graceful-fs');
+const path = require('path');
 
-var outputFileSync = require('./');
-var readRemoveFile = require('read-remove-file');
-var test = require('tape');
+const outputFileSync = require('.');
+const readRemoveFile = require('read-remove-file');
+const test = require('tape');
 
-test('outputFileSync()', function(t) {
-  t.plan(20);
+test('outputFileSync()', t => {
+  t.plan(21);
 
   t.equal(outputFileSync.name, 'outputFileSync', 'should have a function name.');
 
@@ -18,9 +18,9 @@ test('outputFileSync()', function(t) {
     'should return null when it doesn\'t create any directories.'
   );
 
-  readRemoveFile('tmp_file', 'utf8', function(err, content) {
+  readRemoveFile('tmp_file', 'utf8', (...args) => {
     t.deepEqual(
-      [err, content],
+      args,
       [null, 'foo'],
       'should create a file into the existing directory.'
     );
@@ -32,37 +32,31 @@ test('outputFileSync()', function(t) {
     'should return the path of the first created directory.'
   );
 
-  fs.stat('tmp/foo', function(statErr, stat) {
+  fs.stat('tmp/foo', (statErr, stat) => {
     t.strictEqual(statErr, null, 'should accept mkdirp\'s option.');
 
-    var expected = '100744';
-    /* istanbul ignore if */
-    if (process.platform === 'win32') {
-      expected = '100666';
-    }
+    /* istanbul ignore next */
+    const expected = process.platform === 'win32' ? '100666' : '100744';
 
     t.equal(
       stat.mode.toString(8), expected,
       'should reflect `mode` option to the file mode.'
     );
 
-    readRemoveFile('tmp/foo', 'utf8', function(readErr, content) {
+    readRemoveFile('tmp/foo', 'utf8', (...args) => {
       t.deepEqual(
-        [readErr, content],
+        args,
         [null, 'a'],
         'should create a file into the new directory.'
       );
     });
   });
 
-  fs.stat('tmp', function(err, stat) {
+  fs.stat('tmp', (err, stat) => {
     t.strictEqual(err, null, 'should create a directory.');
 
-    var expected = '40744';
-    /* istanbul ignore if */
-    if (process.platform === 'win32') {
-      expected = '40666';
-    }
+    /* istanbul ignore next */
+    const expected = process.platform === 'win32' ? '40666' : '40744';
 
     t.equal(
       stat.mode.toString(8), expected,
@@ -76,14 +70,11 @@ test('outputFileSync()', function(t) {
     encoding: 'ascii'
   });
 
-  fs.stat('t/m', function(err, stat) {
+  fs.stat('t/m', (err, stat) => {
     t.strictEqual(err, null, 'should create multiple directories.');
 
-    var expected = '40745';
-    /* istanbul ignore if */
-    if (process.platform === 'win32') {
-      expected = '40666';
-    }
+    /* istanbul ignore next */
+    const expected = process.platform === 'win32' ? '40666' : '40745';
 
     t.equal(
       stat.mode.toString(8), expected,
@@ -91,23 +82,20 @@ test('outputFileSync()', function(t) {
     );
   });
 
-  fs.stat('t/m/p', function(statErr, stat) {
+  fs.stat('t/m/p', (statErr, stat) => {
     t.strictEqual(statErr, null, 'should create a file into the new directories.');
 
-    var expected = '100644';
-    /* istanbul ignore if */
-    if (process.platform === 'win32') {
-      expected = '100666';
-    }
+    /* istanbul ignore next */
+    const expected = process.platform === 'win32' ? '100666' : '100644';
 
     t.equal(
       stat.mode.toString(8), expected,
       'should reflect `fileMode` option to the file mode.'
     );
 
-    readRemoveFile('t/m/p', 'utf8', function(readErr, content) {
+    readRemoveFile('t/m/p', 'utf8', (...args) => {
       t.deepEqual(
-        [readErr, content],
+        args,
         [null, 'Y'],
         'should accept fs.writeFile\'s option.'
       );
@@ -115,37 +103,43 @@ test('outputFileSync()', function(t) {
   });
 
   t.throws(
-    outputFileSync.bind(null, 'node_modules/mkdirp', ''),
+    () => outputFileSync('./', '0123456789'),
     /EISDIR/,
     'should throw an error when fs.writeFile fails.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'index.js/foo', ''),
+    () => outputFileSync('index.js/foo', ''),
     /EEXIST/,
     'should throw an error when mkdirp fails.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'foo', '', 'utf9'),
+    () => outputFileSync('foo', '', 'utf9'),
     /Unknown encoding.*utf9/,
     'should throw an error when the option is not valid for fs.writeFile.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 'f/o/o', '', {fs: []}),
+    () => outputFileSync('f/o/o', '', {fs: []}),
     /TypeError/,
     'should throw a type error when the option is not valid for mkdirp.'
   );
 
   t.throws(
-    outputFileSync.bind(null, 123, ''),
-    /TypeError.*path/,
+    () => outputFileSync(['a', Buffer.from('b')], ''),
+    /TypeError.*\[ 'a', <Buffer 62> \] is not a string\. Expected a file path to write a file\./,
     'should throw a type error when the first argument is not a string.'
   );
 
   t.throws(
-    outputFileSync.bind(null),
+    () => outputFileSync('', ''),
+    /Error.*Expected a file path to write a file, but received an empty string instead\./,
+    'should throw an error when the first argument is an empty string.'
+  );
+
+  t.throws(
+    () => outputFileSync(),
     /TypeError.*path/,
     'should throw a type error when it takes no arguments.'
   );

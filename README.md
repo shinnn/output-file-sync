@@ -17,7 +17,7 @@ outputFileSync('foo/bar/baz.txt', 'Hi!');
 fs.readFileSync('foo/bar/baz.txt').toString(); //=> 'Hi!'
 ```
 
-## Difference from fs.outputFileSync
+## Difference from [fs.outputFileSync](https://www.npmjs.com/package/fs-extra#outputfile-file-data-callback)
 
 This module is very similar to [fs-extra](https://github.com/jprichardson/node-fs-extra)'s [`fs.outputFileSync`](https://github.com/jprichardson/node-fs-extra#outputfilefile-data-callback) but they are different in the following points:
 
@@ -100,7 +100,7 @@ fs.statSync('dir/file').mode.toString(8); //=> '100644'
 
 ## License
 
-Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2016 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
