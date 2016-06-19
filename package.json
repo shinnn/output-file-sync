@@ -5,9 +5,9 @@
   "repository": "shinnn/output-file-sync",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "eslint *.js --config node_modules/@shinnn/eslintrc-node/rc.json",
-    "test": "node test.js | tap-spec",
-    "coverage": "istanbul cover test.js",
+    "pretest": "eslint --fix --config @shinnn/node-legacy index.js test.js",
+    "test": "node --strong_mode --throw-deprecation --track-heap-objects test.js | tap-spec",
+    "coverage": "node --strong_mode --throw-deprecation --track-heap-objects node_modules/.bin/istanbul cover test.js"
   },
   "license": "MIT",
   "files": [

@@ -1,26 +1,10 @@
-init:
-  - git config --global core.autocrlf true
-
 shallow_clone: true
-
 version: '{build}'
-
 skip_tags: true
-
-environment:
-  matrix:
-    - nodejs_version: '2'
-    - nodejs_version: '0'
-
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - npm install --production
-  - npm install read-remove-file tape
-
+  - ps: Install-Product node Stable
+  - npm uninstall --save-dev @shinnn/eslint-config-node-legacy eslint
+  - npm install
 build: off
-
-test_script:
-  - node test.js
-
-cache:
-  - node_modules
+test_script: node --strong_mode --throw-deprecation --track-heap-objects test.js
+cache: node_modules -> package.json
