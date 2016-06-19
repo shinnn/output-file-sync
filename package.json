@@ -8,7 +8,6 @@
     "pretest": "eslint *.js --config node_modules/@shinnn/eslintrc-node/rc.json",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
-    "coveralls": "istanbul cover test.js && istanbul-coveralls"
   },
   "license": "MIT",
   "files": [
