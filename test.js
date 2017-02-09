@@ -1,68 +1,57 @@
 'use strict';
 
-const fs = require('graceful-fs');
 const path = require('path');
 
+const lstat = require('lstat');
 const outputFileSync = require('.');
-const readRemoveFile = require('read-remove-file');
+const readUtf8File = require('read-utf8-file');
+const rmfr = require('rmfr');
 const test = require('tape');
 
 test('outputFileSync()', t => {
-  t.plan(21);
+  t.plan(16);
 
-  t.equal(outputFileSync.name, 'outputFileSync', 'should have a function name.');
-
-  t.equal(
+  t.strictEqual(
     outputFileSync('tmp_file', 'foo', 'utf8'),
     null,
     'should return null when it doesn\'t create any directories.'
   );
 
-  readRemoveFile('tmp_file', 'utf8', (...args) => {
-    t.deepEqual(
-      args,
-      [null, 'foo'],
-      'should create a file into the existing directory.'
-    );
-  });
+  readUtf8File('tmp_file').then(contents => {
+    t.strictEqual(contents, 'foo', 'should create a file into the existing directory.');
 
-  t.equal(
+    return rmfr('tmp_file');
+  })
+  .catch(t.fail);
+
+  t.strictEqual(
     outputFileSync('tmp/foo', new Buffer('a'), {mode: '0744'}),
     path.resolve('tmp'),
     'should return the path of the first created directory.'
   );
 
-  fs.stat('tmp/foo', (statErr, stat) => {
-    t.strictEqual(statErr, null, 'should accept mkdirp\'s option.');
+  Promise.all([lstat('tmp'), lstat('tmp/foo')])
+  .then(([dirStat, fileStat]) => {
+    t.strictEqual(
+      dirStat.mode.toString(8),
+      process.platform === /* istanbul ignore next */'win32' ? '40666' : '40744',
+      'should reflect `mode` option to the directory mode.'
+    );
 
-    /* istanbul ignore next */
-    const expected = process.platform === 'win32' ? '100666' : '100744';
-
-    t.equal(
-      stat.mode.toString(8), expected,
+    t.strictEqual(
+      fileStat.mode.toString(8),
+      process.platform === /* istanbul ignore next */'win32' ? '100666' : '100744',
       'should reflect `mode` option to the file mode.'
     );
 
-    readRemoveFile('tmp/foo', 'utf8', (...args) => {
-      t.deepEqual(
-        args,
-        [null, 'a'],
-        'should create a file into the new directory.'
-      );
-    });
-  });
+    return readUtf8File('tmp/foo');
+  })
+  .then(contents => {
+    t.strictEqual(contents, 'a', 'should create a file into the new directory.');
 
-  fs.stat('tmp', (err, stat) => {
-    t.strictEqual(err, null, 'should create a directory.');
-
-    /* istanbul ignore next */
-    const expected = process.platform === 'win32' ? '40666' : '40744';
-
-    t.equal(
-      stat.mode.toString(8), expected,
-      'should reflect `mode` option to the directory mode.'
-    );
-  });
+    return rmfr('tmp');
+  })
+  .catch(t.fail);
 
   outputFileSync('t/m/p', 'ə', {
     dirMode: '0745',
@@ -70,37 +59,28 @@ test('outputFileSync()', t => {
     encoding: 'ascii'
   });
 
-  fs.stat('t/m', (err, stat) => {
-    t.strictEqual(err, null, 'should create multiple directories.');
-
-    /* istanbul ignore next */
-    const expected = process.platform === 'win32' ? '40666' : '40745';
-
-    t.equal(
-      stat.mode.toString(8), expected,
+  Promise.all([lstat('t/m'), lstat('t/m/p')])
+  .then(([dirStat, fileStat]) => {
+    t.strictEqual(
+      dirStat.mode.toString(8),
+      process.platform === /* istanbul ignore next */'win32' ? '40666' : '40745',
       'should reflect `dirMode` option to the directory mode.'
     );
-  });
 
-  fs.stat('t/m/p', (statErr, stat) => {
-    t.strictEqual(statErr, null, 'should create a file into the new directories.');
-
-    /* istanbul ignore next */
-    const expected = process.platform === 'win32' ? '100666' : '100644';
-
-    t.equal(
-      stat.mode.toString(8), expected,
+    t.strictEqual(
+      fileStat.mode.toString(8),
+      process.platform === /* istanbul ignore next */'win32' ? '100666' : '100644',
       'should reflect `fileMode` option to the file mode.'
     );
 
-    readRemoveFile('t/m/p', 'utf8', (...args) => {
-      t.deepEqual(
-        args,
-        [null, 'Y'],
-        'should accept fs.writeFile\'s option.'
-      );
-    });
-  });
+    return readUtf8File('t/m/p');
+  })
+  .then(contents => {
+    t.strictEqual(contents, Buffer.from('ə', 'ascii').toString(), 'should accept fs.writeFile\'s option.');
+
+    return rmfr('t');
+  })
+  .catch(t.fail);
 
   t.throws(
     () => outputFileSync('./', '0123456789'),
