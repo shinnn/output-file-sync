@@ -102,25 +102,25 @@ test('outputFileSync()', t => {
 
   t.throws(
     () => outputFileSync('f/o/o', '', {fs: []}),
-    /TypeError/,
+    /^TypeError/,
     'should throw a type error when the option is not valid for mkdirp.'
   );
 
   t.throws(
     () => outputFileSync(['a', Buffer.from('b')], ''),
-    /TypeError.*\[ 'a', <Buffer 62> \] is not a string\. Expected a file path to write a file\./,
+    /^TypeError.*Expected a file path to write a file, but got a non-string value \[ 'a', <Buffer 62> ]\./,
     'should throw a type error when the first argument is not a string.'
   );
 
   t.throws(
     () => outputFileSync('', ''),
-    /Error.*Expected a file path to write a file, but received an empty string instead\./,
+    /^Error.*Expected a file path to write a file, but got '' \(empty string\)\./,
     'should throw an error when the first argument is an empty string.'
   );
 
   t.throws(
     () => outputFileSync(),
-    /TypeError.*path/,
+    /^TypeError.*path/,
     'should throw a type error when it takes no arguments.'
   );
 });
