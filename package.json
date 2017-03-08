@@ -26,18 +26,22 @@
   ],
   "dependencies": {
     "graceful-fs": "^4.1.11",
+    "is-plain-obj": "^1.1.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.15.0",
+    "eslint": "^3.17.1",
+    "get-mode": "^0.1.0",
     "istanbul": "^0.4.5",
-    "lstat": "^0.1.0",
     "read-utf8-file": "^1.0.0",
     "rmfr": "^1.0.2",
     "tape": "^4.6.3"
   },
   "eslintConfig": {
-    "extends": "@shinnn/node"
+    "extends": "@shinnn/node",
+    "rules": {
+      "complexity": "off"
+    }
   }
 }
