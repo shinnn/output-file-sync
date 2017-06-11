@@ -35,7 +35,7 @@
     "get-mode": "^0.1.0",
     "istanbul": "^0.4.5",
     "read-utf8-file": "^1.0.1",
-    "rmfr": "^1.0.2",
+    "rmfr": "^1.0.3",
     "tape": "^4.6.3"
   },
   "eslintConfig": {
