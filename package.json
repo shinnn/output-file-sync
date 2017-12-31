@@ -9,7 +9,7 @@
     "test": "node --throw-deprecation test.js",
     "coverage": "node --throw-deprecation node_modules/.bin/istanbul cover test.js"
   },
-  "license": "MIT",
+  "license": "ISC",
   "files": [
     "index.js"
   ],

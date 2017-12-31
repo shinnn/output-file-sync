@@ -1,7 +1,3 @@
-/*!
- * output-file-sync | MIT (c) Shinnosuke Watanabe
- * https://github.com/shinnn/output-file-sync
-*/
 'use strict';
 
 const dirname = require('path').dirname;
