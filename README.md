@@ -99,7 +99,7 @@ fs.statSync('dir/file').mode.toString(8); //=> '100644'
 
 ## License
 
-[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe
 
 [fs.writeFileSync]: https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options
 [mkdirp]: https://github.com/substack/node-mkdirp
