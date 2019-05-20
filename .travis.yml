@@ -1,4 +1,8 @@
 if: branch !~ ^v\d
 language: node_js
 node_js: node
-after_script: node_modules/.bin/nyc report --reporter=text-lcov | npx coveralls
+jobs:
+  include:
+  - after_success: node_modules/.bin/nyc report --reporter=text-lcov | npx coveralls
+  - os: windows
+    script: node test.js

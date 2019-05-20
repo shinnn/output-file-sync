@@ -1,15 +1,14 @@
 # output-file-sync
 
 [![npm version](https://img.shields.io/npm/v/output-file-sync.svg)](https://www.npmjs.com/package/output-file-sync)
-[![Build Status](https://travis-ci.org/shinnn/output-file-sync.svg?branch=master)](https://travis-ci.org/shinnn/output-file-sync)
-[![Build status](https://ci.appveyor.com/api/projects/status/3qjn5ktuqb6w2cae?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/output-file-sync)
+[![Build Status](https://travis-ci.com/shinnn/output-file-sync.svg?branch=master)](https://travis-ci.com/shinnn/output-file-sync)
 [![Coverage Status](https://coveralls.io/repos/github/shinnn/output-file-sync/badge.svg?branch=master)](https://coveralls.io/github/shinnn/output-file-sync?branch=master)
 
 Synchronously write a file and create its ancestor directories if needed
 
 ```javascript
-const {readFileSync} = require('fs');
-const outputFileSync = require('output-file-sync');
+import {readFileSync} from 'fs';
+import outputFileSync from 'output-file-sync';
 
 outputFileSync('foo/bar/baz.txt', 'Hi!');
 readFileSync('foo/bar/baz.txt', 'utf8'); //=> 'Hi!'
@@ -22,8 +21,8 @@ This module is very similar to [fs-extra](https://github.com/jprichardson/node-f
 1. *output-file-sync* returns the path of the directory created first. [See the API document for more details.](#outputfilesyncpath-data--options)
 2. *output-file-sync* accepts [mkdirp] options.
    ```javascript
-   const {statSync} = require('fs');
-   const outputFileSync = require('output-file-sync');
+   import {statSync} from 'fs';
+   import outputFileSync from 'output-file-sync';
 
    outputFileSync('foo/bar', 'content', {mode: 33260});
    statSync('foo').mode; //=> 33260
@@ -32,7 +31,7 @@ This module is very similar to [fs-extra](https://github.com/jprichardson/node-f
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install output-file-sync
@@ -41,7 +40,7 @@ npm install output-file-sync
 ## API
 
 ```javascript
-const outputFileSync = require('output-file-sync');
+import outputFileSync from 'output-file-sync';
 ```
 
 ### outputFileSync(*path*, *data* [, *options*])
@@ -54,8 +53,8 @@ Return: `string` if it creates more than one directories, otherwise `null`
 It writes the data to a file synchronously. If ancestor directories of the file don't exist, it creates the directories before writing the file.
 
 ```javascript
-const {statSync} = require('fs');
-const outputFileSync = require('output-file-sync');
+import {statSync} from 'fs';
+import outputFileSync from 'output-file-sync';
 
 // When the directory `foo/bar` exists
 outputFileSync('foo/bar/baz/qux.txt', 'Hello', 'utf-8');
@@ -64,7 +63,7 @@ statSync('foo/bar/baz').isDirectory(); //=> true
 statSync('foo/bar/baz/qux.txt').isFile(); //=> true
 ```
 
-It returns the directory path just like [mkdirp.sync](https://github.com/substack/node-mkdirp#mkdirpsyncdir-opts):
+It returns the directory path just like [mkdirp.sync](https://github.com/substack/node-mkdirp#mkdirpsyncdir-opts) does:
 
 > Returns the first directory that had to be created, if any.
 
@@ -93,13 +92,13 @@ fs.statSync('dir').mode.toString(8); //=> '40745'
 fs.statSync('dir/file').mode.toString(8); //=> '100644'
 ```
 
-## Related project
+## Related
 
-* [output-file](https://github.com/shinnn/output-file) (asynchronous version)
+* [output-file](https://github.com/shinnn/output-file) – asynchronous version
 
 ## License
 
-[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2019 Watanabe Shinnosuke
 
 [fs.writeFileSync]: https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options
 [mkdirp]: https://github.com/substack/node-mkdirp
